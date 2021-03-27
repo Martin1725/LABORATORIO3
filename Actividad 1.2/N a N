@@ -1,0 +1,37 @@
+CREATE DATABASE Actividad_1_2_3
+GO
+USE Actividad_1_2_3
+
+
+GO
+
+--Al realizarce una compra de una juego, este genera un numero de compra (IdCompra), el precio de la compra se obtiene a traves de codigo del juego.
+
+
+CREATE TABLE Cuenta(
+  Idcuenta INT NOT NULL PRIMARY KEY,
+  Usuario VARCHAR(100) NOT NULL UNIQUE,
+  Contraseña VARCHAR(100) NOT NULL,
+)
+GO
+
+CREATE TABLE Juegos(
+  IdCompra INT NOT NULL,
+  Codigo INT NOT NULL PRIMARY KEY,
+  Titulo VARCHAR(50) NOT NULL,
+  Descripcion VARCHAR(MAX) NULL,
+  Precio DECIMAL NULL,
+  
+)
+
+GO
+CREATE TABLE Compra(
+  IdCompra INT IDENTITY(100,1) NOT NULL PRIMARY KEY,
+  valor DECIMAL NOT NULL,
+  usuario VARCHAR(100) NOT NULL,
+  CodigoJuego INT NOT NULL ,
+  FOREIGN KEY (usuario) REFERENCES Cuenta(Usuario),
+  FOREIGN KEY (CodigoJuego) REFERENCES Juegos(Codigo) 
+)
+
+
