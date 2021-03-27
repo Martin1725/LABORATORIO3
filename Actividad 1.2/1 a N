@@ -1,0 +1,33 @@
+CREATE DATABASE Actividad_1_2_2
+GO
+USE Actividad_1_2_2
+
+
+GO
+
+--En la plaforma de compra de videojuegos, un cliente cuenta con distintas tarjetas (VISA, MASTER) con las cuales realiza los pagos.
+
+
+CREATE TABLE Cliente(
+  DNI INT NOT NULL PRIMARY KEY,
+  Nombre VARCHAR(50) NOT NULL,
+  Apellido VARCHAR(50) NOT NULL,  
+  Mail VARCHAR(50) NOT NULL,
+  FechaNac DATE NOT NULL CHECK (FechaNac <= getdate())
+)
+GO
+CREATE TABLE Cuentas(
+  Idcuenta INT NOT NULL,
+  usuario VARCHAR(100) NOT NULL UNIQUE,
+  Contraseña VARCHAR(100) NOT NULL,
+  PRIMARY KEY(Idcuenta),
+  FOREIGN KEY (Idcuenta) REFERENCES Cliente(DNI)
+)
+GO
+CREATE TABLE Tarjetas(
+  DNI INT NOT NULL,
+  NroTarjeta BIGINT NOT NULL UNIQUE,
+  PRIMARY KEY(DNI),
+  FOREIGN KEY (DNI) REFERENCES Cliente(DNI)
+)
+
